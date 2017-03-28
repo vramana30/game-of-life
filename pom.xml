@@ -26,6 +26,18 @@
         <developerConnection>scm:git:git@github.com:${github.account}/game-of-life.git</developerConnection>
         <url>scm:git:git@github.com:${github.account}/game-of-life.git</url>
     </scm>
+     <distributionManagement>
+<repository>
+<id>deployment</id>
+<name>Internal Release</name>
+<url>http://192.168.2.199:8081/nexus/content/repositories/releases/</url>
+</repository>
+    <snapshotRepository>
+    <id>deployment</id>
+    <url>http://192.168.2.199:8081/nexus/content/repositories/snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
     <build>
         <defaultGoal>install</defaultGoal>
         <plugins>
@@ -109,8 +121,29 @@
 
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
+                <executions>
+                <execution>
+                 <id>default-deploy</id>
+                 <phase>deploy</phase>
+                <goals>
+            <goal>deploy</goal>
+         </goals>
+      </execution>
+   </executions>
                 <version>2.8.2</version>
+
             </plugin>
+ <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+        <!--     <groupId>com.wakaleo.gameoflife</groupId> -->
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6</version>
+                <extensions>true</extensions>
+                <configuration>
+                <serverId>nexus</serverId>
+        <nexusUrl>http://192.168.2.199:8081/nexus/</nexusUrl>
+      </configuration>
+    </plugin>
 
             <plugin>
                 <groupId>org.easyb</groupId>
