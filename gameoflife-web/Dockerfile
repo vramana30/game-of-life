@@ -1,8 +1,8 @@
 FROM gopi417/tomcatcent6
 
-RUN rm -rf /usr/local/tomcat/webapps/*
+RUN rm -rf /home/apache-tomcat-7.0.77/webapps/*
 
-COPY target/gameoflife.war /usr/local/tomcat/webapps/ROOT.war
+COPY target/gameoflife.war /home/apache-tomcat-7.0.77/webapps/ROOT.war
 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
