@@ -1,4 +1,4 @@
-FROM tomcat:8-jre8
+FROM gopi417/tomcatcent6
 
 RUN rm -rf /usr/local/tomcat/webapps/*
 
